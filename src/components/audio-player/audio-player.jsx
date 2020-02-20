@@ -2,7 +2,7 @@ import React, {PureComponent, Fragment, createRef} from "react";
 import PropTypes from "prop-types";
 
 
-export default class AudioPlayer extends PureComponent {
+class AudioPlayer extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -16,6 +16,10 @@ export default class AudioPlayer extends PureComponent {
   }
 
   componentDidMount() {
+    if (!this._audioRef.current) {
+      return;
+    }
+
     const {src} = this.props;
     const audio = this._audioRef.current;
 
@@ -75,6 +79,10 @@ export default class AudioPlayer extends PureComponent {
   }
 
   componentDidUpdate() {
+    if (!this._audioRef.current) {
+      return;
+    }
+
     const audio = this._audioRef.current;
 
     if (this.props.isPlaying) {
@@ -90,3 +98,5 @@ AudioPlayer.propTypes = {
   onPlayButtonClick: PropTypes.func.isRequired,
   src: PropTypes.string.isRequired,
 };
+
+export default AudioPlayer;

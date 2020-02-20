@@ -11,40 +11,21 @@ const mock = {
   }
 };
 
-it(`AudioPlayer play button be pressed`, () => {
+it(`AudioPlayer play/pause button be pressed`, () => {
   const {song} = mock;
+  const buttonHandler = jest.fn();
 
-  const onPlayButtonHandler = jest.fn();
   const audioPlayer = shallow(
       <AudioPlayer
         isPlaying={true}
-        onPlayButtonClick={onPlayButtonHandler}
+        onPlayButtonClick={()=>{}}
         src={song.src}
       />
   );
 
-  const playButton = audioPlayer.find(`button.track__button--play`);
+  const button = audioPlayer.find(`.track__button`);
 
-  playButton.props().onClick();
+  button.simulate(`click`, buttonHandler({target: false}));
 
-  expect(onPlayButtonHandler.mock.calls.length).toBe(1);
-});
-
-it(`AudioPlayer pause button be pressed`, () => {
-  const {song} = mock;
-
-  const onPauseButtonHandler = jest.fn();
-  const audioPlayer = shallow(
-      <AudioPlayer
-        isPlaying={false}
-        onPlayButtonClick={onPauseButtonHandler}
-        src={song.src}
-      />
-  );
-
-  const pauseButton = audioPlayer.find(`button.track__button--pause`);
-
-  pauseButton.props().onClick();
-
-  expect(onPauseButtonHandler.mock.calls.length).toBe(1);
+  expect(buttonHandler.mock.calls.length).toBe(1);
 });
