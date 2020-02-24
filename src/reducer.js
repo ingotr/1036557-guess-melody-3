@@ -1,6 +1,6 @@
 import {extend} from "./utils.js";
-import {GameType} from "./const.js";
-import questions from "./mocks/questions.js";
+import {GameType} from "./components/const.js";
+import questions from "./components/mocks/questions.js";
 
 const initialState = {
   mistakes: 0,
